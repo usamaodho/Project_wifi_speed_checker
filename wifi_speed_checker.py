@@ -4,14 +4,18 @@ from speedtest import Speedtest  # Import the Speedtest class explicitly
 def speedcheck():
     sp = Speedtest()  # Directly use Speedtest
     sp.get_best_server()  
-    down = str(round(sp.download() / (10 ** 6), 3)) + " Mbps"
-    up = str(round(sp.upload() / (10 ** 6), 3)) + " Mbps"
-    lab_down.config(text=down)
-    lab_up.config(text=up)
+    down = sp.download() / (10 ** 6)  # Download speed in Mbps
+    up = sp.upload() / (10 ** 6)      # Upload speed in Mbps
+
+    down_mb = str(round(down / 8, 3)) + " MB/s"  # Convert to MB/s (Megabytes per second)
+    up_mb = str(round(up / 8, 3)) + " MB/s"      # Convert to MB/s (Megabytes per second)
+
+    lab_down.config(text=down_mb)
+    lab_up.config(text=up_mb)
 
 sp = Tk()
 sp.title("WiFi Speed Checker")
-sp.geometry("500x500")
+sp.geometry("1500x1500")
 sp.config(bg="#C1D8C3")
 
 # Center labels and button
